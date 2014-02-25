@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Configuración De Correo Saliente Desde Alfresco - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jdjoseda.github.io/blog/2014/02/21/primer-post">
+  <link href="/favicon.png" type="image/png" rel="icon">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+
+  <link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+
+  <script src="/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
+  
+
+</head>
+
+  <body   >
+    <div id="wrap">
+      <header role="banner">
+        <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">My Octopress Blog</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="/">Blog</a>
+                </li>
+                <li >
+                    <a href="/blog/archives">Archives</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="subscribe-rss" href="/atom.xml" title="subscribe via RSS">
+                        <span class="visible-xs">RSS</span>
+                        <img class="hidden-xs" src="/images/rss.png" alt="RSS">
+                    </a>
+                </li>
+                
+            </ul>
+            
+                <form class="search navbar-form navbar-right" action="http://google.com/search" method="GET">
+                    <input type="hidden" name="q" value="site:jdjoseda.github.io">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="q" placeholder="Search">
+                    </div>
+                </form>
+            
+        </div>
+    </div>
+</nav>
+
+
+      </header>
+      <div id="main" class="container">
+        <div id="content">
+          <div class="row">
+  <div class="page-content col-md-9">
+    <article class="hentry" role="article">
+      
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-02-21T16:10:18+01:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+    
+    <h1 class="entry-title">
+        Configuración De Correo Saliente Desde Alfresco
+        
+    </h1>
+    
+  </header>
+
+
+<div class="entry-content clearfix"><div>
+<p>Para las notificaciones, invitaciones a sitios, y resto de avisos; Alfresco posee la habilidad de generar y enviar mensajes a un  servidor de correo externo. Para configurar el correo saliente mediante SMTPS, para hacer los envíos desde gmail de forma autenticada y cifrada, simplemente añadiremos un conunto de propiedades al fichero <em>alfresco-global.properties</em>.
+<!-- more --></p>
+
+
+<h2 id="editar-alfresco-global-properties">Editar el fichero alfresco-global.properties</h2>
+
+<p>El fichero lo podemos eencontrar en la siguiente ruta:</P>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Alfresco
+</span><span class='line'>|   └── tomcat
+</span><span class='line'>|       └── shared
+</span><span class='line'>|             └── classes
+</span><span class='line'>|                    └── alfresco-global.properties</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Para añadir esta funcionalidad tendremos que abrir el fichero de propiedades con nuestro editor preferido y añadir las siguientes propiedades. </p>
+
+
+<figure class='code'><figcaption><span>alfresco-global.properties </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='properties'><span class='line'><span class="c">### Outbound mail GMAIL ###</span>
+</span><span class='line'>  <span class="na">mail.host</span><span class="o">=</span><span class="s">smtp.gmail.com</span>
+</span><span class='line'>  <span class="na">mail.port</span><span class="o">=</span><span class="s">465</span>
+</span><span class='line'>  <span class="na">mail.username</span><span class="o">=</span><span class="s">usuario@gmail.com</span>
+</span><span class='line'>  <span class="na">mail.password</span><span class="o">=</span><span class="s">contraseña</span>
+</span><span class='line'>  <span class="na">mail.protocol</span><span class="o">=</span><span class="s">smtps</span>
+</span><span class='line'>  <span class="na">mail.smtps.starttls.enable</span><span class="o">=</span><span class="s">true</span>
+</span><span class='line'>  <span class="na">mail.smtps.auth</span><span class="o">=</span><span class="s">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<div class="alert alert-success">
+<p>Para cualquier duda, revisar el siguiente enlace <a href="http://wiki.alfresco.com/wiki/Outbound_E-mail_Configuration">Documentación sobre configuración de correo en Alfresco</a>.</p>
+</div>
+
+<h2 id="posibles-errores">Posibles errores que nos podemos encontrar</h2>
+
+<p>Si al probar cualquier opción que requiera el envío de email, como por ejemplo (invitación de un usuario a un sitio); observamos que no se produce el resultado esperado, deberemos abrir el log producido por Alfresco y comprobar si la salida es parecida al código siguiente: </p>
+
+
+<figure class='code'><figcaption><span>Alfresco\tomcat\logs\alfrescotomcat-stdout.2014-02-16.log </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='pypylog'><span class='line'>  <span class="err">...</span>
+</span><span class='line'>    <span class="err">154</span>   <span class="err">org.springframework.mail.MailSendException:</span> <span class="err">Mail</span> <span class="err">server</span> <span class="err">connection</span> <span class="err">failed;</span> <span class="err">nested</span> <span class="err">exception</span> <span class="err">is</span> <span class="err">javax.mail.MessagingException:</span> <span class="err">Exception</span> <span class="err">reading</span> <span class="err">response;</span>
+</span><span class='line'>    <span class="err">155</span>    <span class="err">nested</span> <span class="err">exception</span> <span class="err">is:</span>
+</span><span class='line'>    <span class="err">156:</span>     <span class="err">javax.net.ssl.SSLHandshakeException:</span> <span class="err">sun.security.validator.ValidatorException:</span> <span class="err">PKIX</span> <span class="err">path</span> <span class="err">building</span> <span class="err">failed:</span> <span class="err">sun.security.provider.certpath.SunCertPathBuilderException:</span> <span class="err">unable</span> <span class="err">to</span> <span class="err">find</span> <span class="err">valid</span> <span class="err">certification</span> <span class="err">path</span> <span class="err">to</span> <span class="err">requested</span> <span class="err">target.</span> <span class="err">Failed</span> <span class="err">messages:</span> <span class="err">javax.mail.MessagingException:</span> <span class="err">Exception</span> <span class="err">reading</span> <span class="err">response;</span>
+</span><span class='line'>    <span class="err">157</span>    <span class="err">nested</span> <span class="err">exception</span> <span class="err">is:</span>
+</span><span class='line'>    <span class="err">158:</span>     <span class="err">javax.net.ssl.SSLHandshakeException:</span> <span class="err">sun.security.validator.ValidatorException:</span> <span class="err">PKIX</span> <span class="err">path</span> <span class="err">building</span> <span class="err">failed:</span> <span class="err">sun.security.provider.certpath.SunCertPathBuilderException:</span> <span class="err">unable</span> <span class="err">to</span> <span class="err">find</span> <span class="err">valid</span> <span class="err">certification</span> <span class="err">path</span> <span class="err">to</span> <span class="err">requested</span> <span class="err">target;</span> <span class="err">message</span> <span class="err">exception</span> <span class="err">details</span> <span class="err">(1)</span> <span class="err">are:</span>
+</span><span class='line'>    <span class="err">159</span>  <span class="err">Failed</span> <span class="err">message</span> <span class="err">1:</span>
+</span><span class='line'>    <span class="err">160</span>  <span class="err">javax.mail.MessagingException:</span> <span class="err">Exception</span> <span class="err">reading</span> <span class="err">response;</span>
+</span><span class='line'>    <span class="err">161</span>    <span class="err">nested</span> <span class="err">exception</span> <span class="err">is:</span>
+</span><span class='line'>    <span class="err">162:</span>     <span class="err">javax.net.ssl.SSLHandshakeException:</span> <span class="err">sun.security.validator.ValidatorException:</span> <span class="err">PKIX</span> <span class="err">path</span> <span class="err">building</span> <span class="err">failed:</span> <span class="err">sun.security.provider.certpath.SunCertPathBuilderException:</span> <span class="err">unable</span> <span class="err">to</span> <span class="err">find</span> <span class="err">valid</span> <span class="err">certification</span> <span class="err">path</span> <span class="err">to</span> <span class="err">requested</span> <span class="err">target</span>
+</span><span class='line'>    <span class="err">163</span>      <span class="err">at</span> <span class="err">com.sun.mail.smtp.SMTPTransport.readServerResponse(SMTPTransport.java:1462)</span>
+</span><span class='line'>    <span class="err">164</span>      <span class="err">at</span> <span class="err">com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1260)</span>
+</span><span class='line'>    <span class="err">...</span>
+</span><span class='line'>    <span class="err">219</span>      <span class="err">at</span> <span class="err">java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)</span>
+</span><span class='line'>    <span class="err">220</span>      <span class="err">at</span> <span class="err">java.lang.Thread.run(Thread.java:724)</span>
+</span><span class='line'>    <span class="err">221:</span> <span class="err">Caused</span> <span class="err">by:</span> <span class="err">javax.net.ssl.SSLHandshakeException:</span> <span class="err">sun.security.validator.ValidatorException:</span> <span class="err">PKIX</span> <span class="err">path</span> <span class="err">building</span> <span class="err">failed:</span> <span class="err">sun.security.provider.certpath.SunCertPathBuilderException:</span> <span class="err">unable</span> <span class="err">to</span> <span class="err">find</span> <span class="err">valid</span> <span class="err">certification</span> <span class="err">path</span> <span class="err">to</span> <span class="err">requested</span> <span class="err">target</span>
+</span><span class='line'>    <span class="err">222</span>      <span class="err">at</span> <span class="err">sun.security.ssl.Alerts.getSSLException(Alerts.java:192)</span>
+</span><span class='line'>    <span class="err">223</span>      <span class="err">at</span> <span class="err">sun.security.ssl.SSLSocketImpl.fatal(SSLSocketImpl.java:1886)</span>
+</span><span class='line'>    <span class="err">...</span>
+</span><span class='line'>    <span class="err">238</span>      <span class="err">at</span> <span class="err">com.sun.mail.smtp.SMTPTransport.readServerResponse(SMTPTransport.java:1440)</span>
+</span><span class='line'>    <span class="err">239</span>      <span class="err">...</span> <span class="err">57</span> <span class="err">more</span>
+</span><span class='line'>    <span class="err">240:</span> <span class="err">Caused</span> <span class="err">by:</span> <span class="err">sun.security.validator.ValidatorException:</span> <span class="err">PKIX</span> <span class="err">path</span> <span class="err">building</span> <span class="err">failed:</span> <span class="err">sun.security.provider.certpath.SunCertPathBuilderException:</span> <span class="err">unable</span> <span class="err">to</span> <span class="err">find</span> <span class="err">valid</span> <span class="err">certification</span> <span class="err">path</span> <span class="err">to</span> <span class="err">requested</span> <span class="err">target</span>
+</span><span class='line'>    <span class="err">241:</span>     <span class="err">at</span> <span class="err">sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:385)</span>
+</span><span class='line'>    <span class="err">242:</span>     <span class="err">at</span> <span class="err">sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:292)</span>
+</span><span class='line'>    <span class="err">243</span>      <span class="err">at</span> <span class="err">sun.security.validator.Validator.validate(Validator.java:260)</span>
+</span><span class='line'>    <span class="err">244</span>      <span class="err">at</span> <span class="err">sun.security.ssl.X509TrustManagerImpl.validate(X509TrustManagerImpl.java:326)</span>
+</span><span class='line'>    <span class="err">...</span>
+</span><span class='line'>    <span class="err">250</span>      <span class="err">at</span> <span class="err">sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:196)</span>
+</span><span class='line'>    <span class="err">251</span>      <span class="err">at</span> <span class="err">java.security.cert.CertPathBuilder.build(CertPathBuilder.java:268)</span>
+</span><span class='line'>    <span class="err">252:</span>     <span class="err">at</span> <span class="err">sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:380)</span>
+</span><span class='line'>    <span class="err">253</span>      <span class="err">...</span> <span class="err">75</span> <span class="err">more</span>
+</span><span class='line'>    <span class="err">254</span>  <span class="err">2014-02-16</span> <span class="err">22:57:34,640</span>  <span class="err">WARN</span>  <span class="err">[management.subsystems.ChildApplicationContextFactory]</span> <span class="err">[localhost-startStop-1]</span> <span class="err">Startup</span> <span class="err">of</span> <span class="err">&#39;email&#39;</span> <span class="err">subsystem,</span> <span class="err">ID:</span> <span class="err">[email,</span> <span class="err">outbound]</span> <span class="err">failed</span>
+</span><span class='line'>  <span class="err">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Este error nos dice que no disponemos del certificado necesario para verificar la identidad de los servidores de gmail, para solucionar esto deberemos importar el certificado en el repositorio de llaves de Java.</p>
+
+<h2 id="importar-certificados">Importar el certificado de Gmail desde Windows</h2>
+
+<h4>1.- Descargaremos el certificado del servidor remoto SMTP</h4>
+<p>Para ello podremos usar <em>openssl</em> para obtener el certificado, lo descargaremos desde <a href="http://gnuwin32.sourceforge.net/packages/openssl.htm
+">openssl for windows</a></p>.
+<p>Ejecutamos el siguiente comando</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>openssl s_client -connect smtp.gmail.com:465&gt;cert.txt
+</span></code></pre></td></tr></table></div></figure>
+
+<h4>2.- Abrimos el archivo y copiarremos sólo las líneas entre <code>BEGIN CERTIFICATE</code> y <code>END CERTIFICATE</code> en un archivo llamado gmail.cert</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>-----BEGIN CERTIFICATE-----
+</span><span class='line'>MIIDfjCCAuegAwIBAgIDFJoPMA0GCSqGSIb3DQEBBQUAME4xCzAJBgNVBAYTAlVT
+</span><span class='line'>MRAwDgYDVQQKEwdFcXVpZmF4MS0wKwYDVQQLEyRFcXVpZmF4IFNlY3VyZSBDZXJ0
+</span><span class='line'>aWZpY2F0ZSBBdXRob3JpdHkwHhcNMTAwOTE5MDEzMDUxWhcNMTIxMTIwMTQ0MjI4
+</span><span class='line'>WjCB4TEpMCcGA1UEBRMgRFZxc0c5bkIxUGNleTNZVUFzY3otOFNWV0ZnL2Y1aU8x
+</span><span class='line'>                          ...
+</span><span class='line'>L6AtoCuGKWh0dHA6Ly9jcmwuZ2VvdHJ1c3QuY29tL2NybHMvc2VjdXJlY2EuY3Js
+</span><span class='line'>MB0GA1UdDgQWBBRCAb04OmdhLLLRIAtJGNgYnJKQcjANBgkqhkiG9w0BAQUFAAOB
+</span><span class='line'>gQCZQVc8nNHGo5Sr1hh9ZMBK2bcivXqLeJkOVt2pQ0OoMWDsq7/ei4njcN5QJXf0
+</span><span class='line'>mK3Qb4bUkdJUemS3QITRXVqNnBZaP0XUAKBxK5htwHJLuQ83q71Td6NkqSj4yS35
+</span><span class='line'>jM3JXG7LRkr/G6M24RCxBKONckQy+3j1wdy/jZwfisilPg==
+</span><span class='line'>-----END CERTIFICATE-----
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>3.- Importamos el certificado en el repositorio local de llaves de Java</h4>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>keytool -import -alias smtp.gmail.com -keystore &quot;%JAVA_HOME%/jre/lib/security/cacerts&quot; -file gmail.cert
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>4.- Hay que contestar <code>yes</code> a la pregunta &#8220;Trust this certificate? [no]: </h4>
+</div>
+
+
+
+</div>
+
+
+      <footer>
+        <p class="meta text-muted">
+          
+  
+
+<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard">Posted by <span class="fn">Jose David</span></span>
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-02-21T16:10:18+01:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
+          
+
+<span class="glyphicon glyphicon-tags"></span>&nbsp;
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/alfresco/'>Alfresco</a>
+  
+</span>
+
+
+        </p>
+        
+          <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jdjoseda.github.io/blog/2014/02/21/primer-post/" data-via="jdjoseda" data-counturl="http://jdjoseda.github.io/blog/2014/02/21/primer-post/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+        
+        
+      </footer>
+    </article>
+    
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
+    
+  </div>
+
+  
+  <aside class="sidebar col-md-3">
+    
+      <section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Recent Posts</h3>
+  </div>
+  
+  <div id="recent_posts" class="list-group">
+    
+    <a class="list-group-item active" href="/blog/2014/02/21/primer-post/">Configuración De Correo Saliente Desde Alfresco</a>
+    
+  </div>
+</section>
+
+
+
+
+
+
+    
+  </aside>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+    <footer role="contentinfo"><div class="container">
+    <p class="text-muted credits">
+  Copyright &copy; 2014 - Your Name<br>
+  <small>
+      <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>,
+      <span class="credit">customized with <a href="https://github.com/kAworu/octostrap3">octostrap3</a></span>.
+  </small>
+</p>
+
+</div>
+</footer>
+    <script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/javascripts/modernizr-2.0.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'jdjosedajd';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jdjoseda.github.io/blog/2014/02/21/primer-post/';
+        var disqus_url = 'http://jdjoseda.github.io/blog/2014/02/21/primer-post/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+  </body>
+</html>
